@@ -54,7 +54,7 @@ contract RockPaperScissors is Stoppable {
         }
     }
     
-    function payWinner() public {
+    function payWinner() internal {
         address payTo;
         uint toSend;
         
@@ -78,10 +78,10 @@ contract RockPaperScissors is Stoppable {
     }
     
     function makePayment(address payee, uint amount)
-        public
+        internal
         returns(bool success)
         {
-            require(payee.send(amount));
+            payee.transfer(amount);
             emit LogPayout(payee, amount);
             return true;
         }
